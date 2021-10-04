@@ -1,0 +1,8 @@
+{
+    "realm": "sonatrach",
+    "auth-server-url": "https://auth.mounaim.io/auth/",
+    "ssl-required": "external",
+    "resource": "web",
+    "public-client": true,
+    "confidential-port": 0
+  }
