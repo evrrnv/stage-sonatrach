@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ReactKeycloakProvider } from '@react-keycloak/web'
+import { initializeIcons } from "@fluentui/react";
 import './index.css';
 import App from './App';
 import keycloak from './lib/keycloak'
+import Loading from './components/Loading';
 
-const Loading = () => (<div>loading...</div>)
+initializeIcons();
 
 ReactDOM.render(
   <ReactKeycloakProvider 
