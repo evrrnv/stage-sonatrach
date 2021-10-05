@@ -1,17 +1,15 @@
-import './App.css';
-import { useKeycloak } from '@react-keycloak/web';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import SideBar from './components/SideBar';
-import NavBar from './components/NavBar';
-import { LayerHost, Text } from '@fluentui/react';
-
-const Home = () => (<Text>Home</Text>)
-const History = () => (<Text>History</Text>)
+import "./App.css";
+import { useKeycloak } from "@react-keycloak/web";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import SideBar from "./components/SideBar";
+import NavBar from "./components/NavBar";
+import { LayerHost } from "@fluentui/react";
+import Home from "./pages/Home";
 
 const App = () => {
-  const { keycloak } = useKeycloak()
+  const { keycloak } = useKeycloak();
 
-  const layerHostId = 'layerHost'
+  const layerHostId = "layerHost";
 
   if (keycloak.authenticated) {
     return (
@@ -19,21 +17,19 @@ const App = () => {
         <BrowserRouter>
           <LayerHost id={layerHostId} />
           <NavBar layerHostId={layerHostId} />
-          <div style={{ display: 'flex', flexGrow: 1}}>
+          <div style={{ display: "flex", flexGrow: 1 }}>
             <SideBar />
             <Switch>
-              <Route path='/' exact component={Home} />
-              <Route path='/history' component={History} />
+              <Route path="/" exact component={Home} />
             </Switch>
           </div>
-
         </BrowserRouter>
       </div>
-    )
+    );
   } else {
-    keycloak.login()
-    return null
+    keycloak.login();
+    return null;
   }
-}
+};
 
 export default App;
