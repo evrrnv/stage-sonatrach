@@ -1,6 +1,7 @@
 import { Nav } from '@fluentui/react'
 import { useState } from 'react';
 import { useHistory } from "react-router-dom"
+import styles from './style'
 
 const SideBar = () => {
 
@@ -37,17 +38,9 @@ const SideBar = () => {
       setSelected(item.key)
       history.push(item.url);
     }
-
-    const navStyles = {
-        root: {
-          width: '200px',
-          height: "100%",
-          border: '1px solid #eee',
-        },
-      };
   
     return (
-      <Nav groups={navLinkGroups} styles={navStyles} selectedKey={selected} onLinkClick={onLinkClick} />
+      <Nav groups={navLinkGroups} styles={styles} selectedKey={selected} onLinkClick={onLinkClick} />
     )
     
   }
