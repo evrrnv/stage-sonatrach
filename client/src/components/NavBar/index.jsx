@@ -1,4 +1,4 @@
-import { Layer, Text } from "@fluentui/react";
+import { Layer, PersonaSize, Text } from "@fluentui/react";
 import logo from "../../assets/img/logo.png";
 import ReportProblem from "../ReportProblem";
 import UserPersona from "../UserPersona";
@@ -22,7 +22,7 @@ const NavBar = ({ layerHostId }) => {
         }}
       >
         <ReportProblem />
-        <UserPersona />
+        <UserPersona size={PersonaSize.size32} name={"Abdelmounaim Bousmat"} />
       </div>
     </header>
   );

@@ -16,3 +16,10 @@ body {
   height: 100%;
 }
 
+.ms-FocusZone {
+  padding-top: 0;
+}
+
+.ms-Viewport {
+  height: 100%;
+}

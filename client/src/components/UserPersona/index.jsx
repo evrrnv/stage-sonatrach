@@ -1,10 +1,10 @@
-import { Persona, PersonaSize } from "@fluentui/react";
+import { Persona } from "@fluentui/react";
 
-const UserPersona = () => {
+const UserPersona = ({ size, name }) => {
   return (
     <Persona
-      text="Abdelmounaim Bousmat"
-      size={PersonaSize.size32}
+      text={name}
+      size={size}
     />
   );
 };

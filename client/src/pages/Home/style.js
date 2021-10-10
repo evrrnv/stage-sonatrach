@@ -1,21 +1,18 @@
-import { mergeStyleSets } from "@fluentui/react";
-
-const getClassNames = () => {
-  return mergeStyleSets({
-    container: {
-      width: "100%"
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      width: "40rem",
-      gap: "0.8rem"
-    },
-    formContainer: {
-      display: "flex",
-      justifyContent: "center"
-    }
-  });
+export const homeStack = {
+  root: { width: "100%" }
 };
 
-export default getClassNames;
+export const headStack = {
+  root: {
+    height: 44,
+    marginLeft: "48px",
+    marginTop: "8px",
+    marginBottom: "8px",
+  },
+};
+
+export const detailsList = { root: { height: "100%" } };
+
+export const eyeIcon = { icon: { lineHeight: "18px" } };
+
+export const marqueeSelection = detailsList
