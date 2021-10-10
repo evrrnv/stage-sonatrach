@@ -4,10 +4,8 @@ export const homeStack = {
 
 export const headStack = {
   root: {
-    height: 44,
-    marginLeft: "48px",
-    marginTop: "8px",
-    marginBottom: "8px",
+    margin: "0.5rem 3rem 0.5rem 3rem",
+    alignItems: "center"
   },
 };
 
@@ -16,3 +14,5 @@ export const detailsList = { root: { height: "100%" } };
 export const eyeIcon = { icon: { lineHeight: "18px" } };
 
 export const marqueeSelection = detailsList
+
+export const CommandBarWrapper = { root: { height: "44px"} }

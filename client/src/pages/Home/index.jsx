@@ -6,6 +6,7 @@ import {
   CommandBarButton,
   Selection,
   PersonaSize,
+  TextField,
 } from "@fluentui/react";
 import { useEffect, useState } from "react";
 import PreviewPopup from "../../components/PreviewPopup";
@@ -21,7 +22,7 @@ import {
 const Home = () => {
   const [isSelected, setIsSelected] = useState(false);
   const [disabledButton, setDisabledButton] = useState();
-  const [previewHidden, setPreviewHidden] = useState(true)
+  const [previewHidden, setPreviewHidden] = useState(true);
 
   const moreProps = {
     items: [
@@ -82,31 +83,34 @@ const Home = () => {
     return <UserPersona size={PersonaSize.size24} name={Utilisateur} />;
   };
 
-  const handleClickPreview = () => setPreviewHidden(false)
+  const handleClickPreview = () => setPreviewHidden(false);
 
-  const handlePreviewCancel = () => setPreviewHidden(true)
+  const handlePreviewCancel = () => setPreviewHidden(true);
 
   return (
     <Stack styles={homeStack}>
-      <Stack horizontal styles={headStack}>
-        <CommandBarButton
-          styles={eyeIcon}
-          iconProps={{ iconName: "RedEye" }}
-          text="Aperçu"
-          disabled={disabledButton}
-          onClick={handleClickPreview}
-        />
-        <CommandBarButton
-          iconProps={{ iconName: "Edit" }}
-          text="Modifier l'État"
-          disabled={disabledButton}
-          menuProps={editProps}
-        />
-        <CommandBarButton
-          menuProps={moreProps}
-          text="Plus"
-          disabled={disabledButton}
-        />
+      <Stack horizontal horizontalAlign="space-between" styles={headStack}>
+        <Stack horizontal style={{height: "44px"}}>
+          <CommandBarButton
+            styles={eyeIcon}
+            iconProps={{ iconName: "RedEye" }}
+            text="Aperçu"
+            disabled={disabledButton}
+            onClick={handleClickPreview}
+          />
+          <CommandBarButton
+            iconProps={{ iconName: "Edit" }}
+            text="Modifier l'État"
+            disabled={disabledButton}
+            menuProps={editProps}
+          />
+          <CommandBarButton
+            menuProps={moreProps}
+            text="Plus"
+            disabled={disabledButton}
+          />
+        </Stack>
+        <TextField style={{width: "250px"}} placeholder="Filtrer par utilisateur" />
       </Stack>
       <MarqueeSelection isEnabled={false} styles={marqueeSelection}>
         <DetailsList
@@ -150,7 +154,10 @@ const Home = () => {
           selection={selection}
         />
       </MarqueeSelection>
-      <PreviewPopup hidePreview={previewHidden} onCancel={handlePreviewCancel} />
+      <PreviewPopup
+        hidePreview={previewHidden}
+        onCancel={handlePreviewCancel}
+      />
     </Stack>
   );
 };
