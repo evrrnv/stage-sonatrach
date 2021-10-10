@@ -6,16 +6,12 @@ import {
   DialogType,
   PrimaryButton,
   TextField,
-  FontIcon,
-  Link
 } from "@fluentui/react";
 import React, { useState } from "react";
-import getClassNames from './style'
+import Attachment from "../Attachment";
 
 const ProblemForm = () => {
   const [hideDialog, setHideDialog] = useState(true);
-
-  const { link, li, closeIcon } = getClassNames()
 
   const dialogContentProps = {
     type: DialogType.largeHeader,
@@ -28,19 +24,19 @@ const ProblemForm = () => {
   };
 
   const toggleHideDialog = () => {
-    setHideDialog(!hideDialog)
+    setHideDialog(!hideDialog);
   };
 
   return (
     <div>
       <DefaultButton iconProps={{ iconName: "Add" }} onClick={toggleHideDialog}>
-      Rapporter un Problème
+        Rapporter un Problème
       </DefaultButton>
       <Dialog
         hidden={hideDialog}
         dialogContentProps={dialogContentProps}
         modelProps={modelProps}
-        minWidth={"35rem"}
+        minWidth="35rem"
       >
         <form>
           <TextField label="Title" />
@@ -49,24 +45,7 @@ const ProblemForm = () => {
             pièce jointe
           </ActionButton>
 
-          <ul style={{
-            padding: "9px 13px 0px",
-            listStyleType: "none",
-            margin: "0px",
-            display: "flex",
-            flexDirection: "column",   
-          }}>
-            <li className={li}>
-              <FontIcon aria-label="TextDocument" iconName="TextDocument" />
-              <Link className={link} href="">file-1.txt</Link>
-              <FontIcon className={closeIcon} aria-label="StatusCircleErrorX" iconName="StatusCircleErrorX" />
-            </li>
-            <li className={li}>
-              <FontIcon aria-label="TextDocument" iconName="TextDocument" />
-              <Link className={link} href="">file-2.txt</Link>
-              <FontIcon className={closeIcon} aria-label="StatusCircleErrorX" iconName="StatusCircleErrorX" />
-            </li>
-          </ul>
+          <Attachment />
         </form>
         <DialogFooter>
           <PrimaryButton text="Save" />

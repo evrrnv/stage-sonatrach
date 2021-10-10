@@ -8,6 +8,7 @@ import {
   PersonaSize,
 } from "@fluentui/react";
 import { useEffect, useState } from "react";
+import PreviewPopup from "../../components/PreviewPopup";
 import UserPersona from "../../components/UserPersona";
 import {
   detailsList,
@@ -20,6 +21,7 @@ import {
 const Home = () => {
   const [isSelected, setIsSelected] = useState(false);
   const [disabledButton, setDisabledButton] = useState();
+  const [previewHidden, setPreviewHidden] = useState(true)
 
   const moreProps = {
     items: [
@@ -80,6 +82,10 @@ const Home = () => {
     return <UserPersona size={PersonaSize.size24} name={Utilisateur} />;
   };
 
+  const handleClickPreview = () => setPreviewHidden(false)
+
+  const handlePreviewCancel = () => setPreviewHidden(true)
+
   return (
     <Stack styles={homeStack}>
       <Stack horizontal styles={headStack}>
@@ -88,6 +94,7 @@ const Home = () => {
           iconProps={{ iconName: "RedEye" }}
           text="Aperçu"
           disabled={disabledButton}
+          onClick={handleClickPreview}
         />
         <CommandBarButton
           iconProps={{ iconName: "Edit" }}
@@ -143,6 +150,7 @@ const Home = () => {
           selection={selection}
         />
       </MarqueeSelection>
+      <PreviewPopup hidePreview={previewHidden} onCancel={handlePreviewCancel} />
     </Stack>
   );
 };
@@ -173,20 +181,5 @@ const data = [
     "Pièces jointes": 2,
   },
 ];
-
-function _generateDocuments() {
-  const items = [];
-  for (let i = 0; i < 7; i++) {
-    items.push({
-      id: i,
-      Titre: "Nullam dapibus nunc tempus elit vehicula iaculis.",
-      Date: "9/30/2021",
-      État: "Pending",
-      Utilisateur: "Abdelmounaim Bousmat",
-      "Pièces jointes": 0,
-    });
-  }
-  return items;
-}
 
 export default Home;

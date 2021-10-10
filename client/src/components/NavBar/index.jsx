@@ -2,10 +2,10 @@ import { Layer, PersonaSize, Text } from "@fluentui/react";
 import logo from "../../assets/img/logo.png";
 import ReportProblem from "../ReportProblem";
 import UserPersona from "../UserPersona";
-import getClassNames from "./style";
+import styles from "./style";
 
 const NavBar = ({ layerHostId }) => {
-  let { header, img, logoContainer } = getClassNames();
+  let { header, img, logoContainer } = styles;
 
   const content = (
     <header className={header}>
