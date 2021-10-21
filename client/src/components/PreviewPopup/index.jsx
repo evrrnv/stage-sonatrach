@@ -23,7 +23,7 @@ const PreviewPopup = ({ hidePreview, onCancel }) => {
       <span key={1} className={styles.nameText}>
         Sabrina De Luca
       </span>,
-      <span key={2}> a signalé ce problème</span>,
+      <span key={2}> a rapporté ce problème ce problème</span>,
     ],
     activityPersonas: [{ imageUrl: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" }],
     isCompact: true,
