@@ -1,7 +1,7 @@
 import { Spinner, SpinnerSize } from "@fluentui/react";
 
 const Loading = () => (
-  <Spinner size={SpinnerSize.large} label="Loading account" />
+  <Spinner styles={{root: {position: "fixed", width: "100%"}}} size={SpinnerSize.large} label="Loading account" />
 );
 
 export default Loading;

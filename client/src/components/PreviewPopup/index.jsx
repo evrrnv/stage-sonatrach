@@ -7,26 +7,56 @@ import {
   Text,
 } from "@fluentui/react";
 import Attachment from "../Attachment";
-import styles from './style'
+import styles from "./style";
 
-const PreviewPopup = ({ hidePreview, onCancel }) => {
+const PreviewPopup = ({ hidePreview, onCancel, data }) => {
+  const {
+    title,
+    description,
+    userAccountByCreatedBy: { firstName, lastName },
+    createdAt,
+  } = data;
+
   const dialogContentProps = {
     type: DialogType.largeHeader,
-    title: "Nullam dapibus nunc tempus elit vehicula iaculis",
-    subText:
-      "Sed non elementum sem. Vestibulum mauris nisl, tincidunt in placerat in, lacinia in lectus. Nullam mattis malesuada purus a fringilla. Donec porttitor nibh quis justo sagittis, at porta purus euismod. Pellentesque leo metus, posuere vel mattis eu, suscipit ut est. Donec accumsan finibus dui, sed facilisis dui fringilla ut. Integer volutpat facilisis dignissim. Ut posuere nibh et tellus auctor, vitae tempor diam elementum. Nam varius vel nulla eget semper. Vestibulum pretium porttitor mi in luctus. Donec vitae feugiat massa, tincidunt convallis ipsum. Donec vitae faucibus mi. Nulla facilisi. Nulla dapibus maximus urna ut sollicitudin. Aliquam posuere tortor sed nisl viverra, egestas tempor diam bibendum. Nunc consequat imperdiet nibh interdum commodo. ",
+    title,
+    subText: description,
   };
+
+  const fullName = firstName + " " + lastName;
+
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  function titleCase(str) {
+    var splitStr = str.toLowerCase().split(" ");
+    for (var i = 0; i < splitStr.length; i++) {
+      splitStr[i] =
+        splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(" ");
+  }
 
   const activityItemProps = {
     key: 3,
     activityDescription: [
       <span key={1} className={styles.nameText}>
-        Sabrina De Luca
+        {fullName}
       </span>,
-      <span key={2}> a rapporté ce problème ce problème</span>,
+      <span key={2}> a rapporté ce problème</span>,
     ],
-    activityPersonas: [{ imageUrl: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" }],
-    isCompact: true,
+    activityPersonas: [
+      {
+        imageInitials: firstName.charAt(0) + lastName.charAt(0),
+      },
+    ],
+    timeStamp: titleCase(
+      new Date(createdAt).toLocaleDateString("fr-FR", options)
+    ),
   };
 
   return (

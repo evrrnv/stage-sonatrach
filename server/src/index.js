@@ -9,11 +9,7 @@ const ConnectionFilterPlugin = require("postgraphile-plugin-connection-filter");
 const app = express();
 
 const corsOptions = {
-  origin:
-    process.env.NODE_ENV === "production"
-      ? "https://sonatrach.mounaim.io"
-      : "http://localhost:3000",
-  optionsSuccessStatus: 200,
+  origin: "http://localhost:3000"
 };
 
 app.use(cors(corsOptions));
@@ -55,19 +51,21 @@ app.use(
         if (token.length > 1) {
           try {
             const user = await keycloak.verifyOnline(token[1]);
+            console.log(user)
             const role = user.resourceAccess.web.roles[0];
             const id = user.id.split(":")[2];
-
             return {
               "jwt.claims.user_id": id,
-              //   'jwt.claims.role': role,
+              role: role.toLowerCase(),
             };
-          } catch (e) {}
+          } catch (e) {
+            console.log(e)
+          }
         }
       }
 
       return {
-        role: "admin",
+        role: "anonymous",
       };
     },
   })

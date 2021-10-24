@@ -1,11 +1,12 @@
 import { Nav } from "@fluentui/react";
+import { useKeycloak } from "@react-keycloak/web";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./style";
 
 const SideBar = () => {
   const [selected, setSelected] = useState(1);
-
+  const { keycloak } = useKeycloak();
   let history = useHistory();
 
   const navLinkGroups = [
@@ -29,7 +30,11 @@ const SideBar = () => {
   const onLinkClick = (e, item) => {
     e.preventDefault();
     setSelected(item.key);
-    history.push(item.url);
+    if (item.key !== 2) {
+      history.push(item.url);
+    } else {
+      keycloak.logout()
+    }
   };
 
   return (

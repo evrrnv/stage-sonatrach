@@ -23,7 +23,7 @@ const styles = mergeStyleSets({
       cursor: "pointer"
   },
   ul: {
-    padding: "9px 14px 0px",
+    padding: "9px 13px 0px",
     listStyleType: "none",
     margin: "0px",
     display: "flex",

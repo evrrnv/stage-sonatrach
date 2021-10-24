@@ -15,8 +15,8 @@ public class UserRepository implements IUserRepository {
 	private final Logger log = Logger.getLogger(UserRepository.class);
 
 	private final String SQL_SELECT_BY_ID = "SELECT app.user_account.id, keycloak_id, username, password, email, last_name, first_name FROM app_private.user_account INNER JOIN app.user_account ON app_private.user_account.id = app.user_account.id AND CAST(app_private.user_account.id AS text)=?";
-	private final String SQL_SELECT_BY_USERNAME = "SELECT app.user_account.id, keycloak_id, username, password, email, last_name, first_name FROM app_private.user_account INNER JOIN app.user_account ON app_private.user_account.id = app.user_account.id AND app_private.user_account.username = ? OR CAST(app_private.user_account.id AS text)=?";
-	private final String SQL_SELECT_BY_EMAIL = "SELECT app.user_account.id, keycloak_id, username, password, email, last_name, first_name FROM app_private.user_account INNER JOIN app.user_account ON app_private.user_account.id = app.user_account.id AND app_private.user_account.email = ? OR CAST(app_private.user_account.id AS text)=?";
+	private final String SQL_SELECT_BY_USERNAME = "SELECT app.user_account.id, keycloak_id, username, password, email, last_name, first_name FROM app_private.user_account INNER JOIN app.user_account ON app_private.user_account.id = app.user_account.id AND app_private.user_account.username = ?";
+	private final String SQL_SELECT_BY_EMAIL = "SELECT app.user_account.id, keycloak_id, username, password, email, last_name, first_name FROM app_private.user_account INNER JOIN app.user_account ON app_private.user_account.id = app.user_account.id AND app.user_account.email = ?";
 	private final String SQL_INSERT = "WITH ins_pvt_acc AS (INSERT INTO app_private.user_account (keycloak_id, username, password) VALUES (?, ?, ?) RETURNING id) " 
 	+ "INSERT INTO app.user_account(id, email, last_name, first_name) "
 	+ "VALUES ((SELECT id FROM ins_pvt_acc), ?, ?, ?) RETURNING id";
@@ -118,7 +118,6 @@ public class UserRepository implements IUserRepository {
 			db.createPreparedStatement(SQL_SELECT_BY_USERNAME);
 
 			db.getPreparedStatement().setString(1, username);
-			db.getPreparedStatement().setString(2, username);
 
 			ResultSet rs = db.getPreparedStatement().executeQuery();
 
@@ -150,7 +149,6 @@ public class UserRepository implements IUserRepository {
 			db.createPreparedStatement(SQL_SELECT_BY_EMAIL);
 
 			db.getPreparedStatement().setString(1, username);
-			db.getPreparedStatement().setString(2, username);
 
 			ResultSet rs = db.getPreparedStatement().executeQuery();
 
