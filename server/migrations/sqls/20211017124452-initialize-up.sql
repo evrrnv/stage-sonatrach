@@ -174,6 +174,7 @@ COMMENT ON COLUMN app.problem.created_by is E'@omit update,create';
 CREATE TABLE app.attachment(
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     name TEXT NOT NULL,
+    unique_name TEXT NULL,
     url TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT now(),
     problem_id uuid REFERENCES app.problem(id)

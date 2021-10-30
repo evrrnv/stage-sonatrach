@@ -27,6 +27,7 @@ const CREATE_PROBLEM = gql`
           nodes {
             id
             name
+            uniqueName
           }
         }
       }

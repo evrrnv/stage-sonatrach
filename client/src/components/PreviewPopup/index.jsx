@@ -82,7 +82,7 @@ const PreviewPopup = ({ hidePreview, onCancel, data }) => {
         <Text variant="large">Pièce jointe</Text>
       </div>
       <Attachment files={attachmentsByProblemId.nodes} onClick={(e) => {
-        setAttachmentImage("http://localhost:4000/attachments/" + e.target.innerText)
+        setAttachmentImage("http://localhost:4000/attachments/" + e.target.dataset.uniqueName)
         hideModal()
       }} />
       <ActivityItem {...activityItemProps} className={styles.exampleRoot} />

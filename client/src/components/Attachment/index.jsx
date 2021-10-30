@@ -2,7 +2,6 @@ import {
   FontIcon,
   Link,
 } from "@fluentui/react";
-import { useState } from "react";
 import styles from "./style";
 
 const Attachment = ({ files, remove, onDelete, onClick }) => {
@@ -13,7 +12,7 @@ const Attachment = ({ files, remove, onDelete, onClick }) => {
       return (
         <li key={i} className={li}>
           <FontIcon aria-label="TextDocument" iconName="TextDocument" />
-          <Link className={link} href="" onClick={onClick}>
+          <Link data-unique-name={v.uniqueName} className={link} href="" onClick={onClick}>
             {v.name}
           </Link>
           {remove && (

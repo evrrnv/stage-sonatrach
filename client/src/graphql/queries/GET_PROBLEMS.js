@@ -35,6 +35,7 @@ const GET_PROBLEMS = gql`
           nodes {
             id
             name
+            uniqueName
           }
         }
       }

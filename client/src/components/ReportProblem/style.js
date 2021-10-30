@@ -1,4 +1,4 @@
-import { getTheme, mergeStyleSets } from "@fluentui/react";
+import { getTheme } from "@fluentui/react";
 
 const theme = getTheme();
 

@@ -40,22 +40,23 @@ app.post("/upload-attachments", async (req, res) => {
     const client = new Client(DATABASE_URL);
     client.connect();
 
-    const data = values.map(({ name, url }) => [name, url, problemId]);
+    const data = values.map(({ name, unique_name, url }) => [name, unique_name, url, problemId]);
 
     client.query(
       format(
-        "INSERT INTO app.attachment (name, url, problem_id) VALUES %L RETURNING id, name",
+        "INSERT INTO app.attachment (name, unique_name, url, problem_id) VALUES %L RETURNING id, name, unique_name",
         data
       ),
       [],
       (err, result) => {
         if (err) console.log(err);
 
-        const send = result.rows.map(({ id, name }) => {
+        const send = result.rows.map(({ id, name, unique_name }) => {
           return {
             "__typename": "Attachment",
             "id": id,
-            "name": name
+            "name": name,
+            "uniqueName": unique_name
           }
         })
 
@@ -133,7 +134,8 @@ async function resolveUpload(upload) {
     upload.mv(fsPath, (err) => {
       if (err) reject(err);
       resolve({
-        name: id,
+        name: upload.name,
+        unique_name: id,
         url: fsPath,
       });
     });

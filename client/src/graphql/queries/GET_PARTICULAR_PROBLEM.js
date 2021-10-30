@@ -13,6 +13,7 @@ const GET_PARTICULAR_PROBLEM = gql`
         nodes {
           id
           name
+          uniqueName
         }
       }
     }
