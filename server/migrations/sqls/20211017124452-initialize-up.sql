@@ -96,8 +96,6 @@ INSERT INTO app.problem_status (id, name) VALUES ('d21d2f10-56f2-49cd-97f7-bb652
 INSERT INTO app.problem_status (id, name) VALUES ('e2565d00-e76c-474a-b5b3-c4b799edfd5d', 'Traité');
 INSERT INTO app.problem_status (id, name) VALUES ('85cb5e7e-8323-4254-8078-d6e189d3280e', 'Non traitable');
 
--- get pending problem status id
-
 CREATE FUNCTION app.get_pending_problem_status_id() RETURNS uuid AS $$
     SELECT id FROM app.problem_status WHERE name = 'En attente';
 $$ LANGUAGE SQL;
@@ -110,9 +108,9 @@ CREATE TABLE app.problem (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     title TEXT NOT NULL,
     description TEXT NOT NULL,
+    status uuid NOT NULL DEFAULT app.get_pending_problem_status_id() REFERENCES app.problem_status (id),
     created_by uuid NOT NULL REFERENCES app.user_account (id),
     created_at TIMESTAMP NOT NULL DEFAULT now(),
-    status uuid NOT NULL DEFAULT app.get_pending_problem_status_id() REFERENCES app.problem_status (id),
     updated_at TIMESTAMP NOT NULL DEFAULT now()
 );
 
@@ -166,10 +164,27 @@ CREATE POLICY c3_select_problem ON app.problem FOR SELECT TO c3 USING
     ));
 
 COMMENT ON TABLE app.problem is E'@omit delete';
-COMMENT ON COLUMN app.problem.id is E'@omit create,update';
-COMMENT ON COLUMN app.problem.created_at is E'@omit create,update,delete';
-COMMENT ON COLUMN app.problem.updated_at is E'@omit create,update,delete';
-COMMENT ON COLUMN app.problem.created_by is E'@omit create,update,delete';
+COMMENT ON COLUMN app.problem.id is E'@omit update,create';
+COMMENT ON COLUMN app.problem.created_at is E'@omit update,create';
+COMMENT ON COLUMN app.problem.updated_at is E'@omit update,create';
+COMMENT ON COLUMN app.problem.created_by is E'@omit update,create';
+
+-- attachment
+
+CREATE TABLE app.attachment(
+    id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name TEXT NOT NULL,
+    url TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT now(),
+    problem_id uuid REFERENCES app.problem(id)
+);
+
+GRANT SELECT ON app.attachment TO c1, c2, c3;
+GRANT INSERT ON app.attachment TO c1, c2;
+
+COMMENT ON COLUMN app.attachment.id is E'@omit create';
+COMMENT ON COLUMN app.attachment.created_at is E'@omit create,update,delete';
+COMMENT ON COLUMN app.attachment.url is E'@omit';
 
 -- problem created by trigger
 
@@ -203,6 +218,7 @@ $$ LANGUAGE SQL STABLE;
 
 GRANT EXECUTE ON FUNCTION app.current_user() TO c1, c2, c3;
 
+
 --------------------------------------------------
 
 -- insert role data
@@ -235,3 +251,10 @@ INSERT INTO app.user_roles (user_id, role_id) VALUES ('9ecb9eb1-1177-45c9-9062-2
 
 -- INSERT INTO app.problem (id, title, description, created_by) VALUES ('33fe545d-91a4-495d-bf43-76960760a41c', 'Suspendisse mauris nulla ullamcorper ut lacinia nec', 'Proin euismod tristique urna eu scelerisque. Fusce nec turpis in dolor varius lacinia in sed dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae', 'dc695e58-3a7d-47b8-b3fd-cbe29c52d0c5');
 -- INSERT INTO app.problem (id, title, description, created_by) VALUES ('26275979-0a30-4d87-a0f4-082bee54f8cf', 'Nullam dictum orci ipsum a interdum elit aliquet sed. Nulla facilisi', 'Duis facilisis ipsum eget arcu bibendum rhoncus, Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas', '4f9c73b7-98fa-43a0-aac5-fc2e3a60d18e');
+
+-- create table public.post (
+--   id serial primary key,
+--   headline text,
+--   body text,
+--   header_image_file text
+-- );

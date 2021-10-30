@@ -9,8 +9,14 @@ const GET_PARTICULAR_PROBLEM = gql`
         lastName
       }
       createdAt
+      attachmentsByProblemId {
+        nodes {
+          id
+          name
+        }
+      }
     }
   }
 `;
 
-export default GET_PARTICULAR_PROBLEM
+export default GET_PARTICULAR_PROBLEM;

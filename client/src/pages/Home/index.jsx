@@ -164,7 +164,7 @@ const Home = () => {
 
   const handlePreviewCancel = () => setPreviewHidden(true);
 
-  const formatedProblemsListData = (data) => {
+  const formatedProblemsListData = () => {
     return problemsList.allProblems.nodes.map((v) => {
       const date = new Date(v.createdAt);
       const fullName =
@@ -179,7 +179,7 @@ const Home = () => {
         État: v.problemStatusByStatus.name,
         Utilisateur:
           v.userAccountByCreatedBy.id === currentUser.id ? "Moi" : fullName,
-        "Pièces jointes": 0,
+        "Pièces jointes": v.attachmentsByProblemId.nodes.length,
       };
     });
   };
@@ -216,8 +216,6 @@ const Home = () => {
   const hideCalendar = () => {
     setShowCalendar(!showCalendar);
   };
-
-  console.log(isSelected)
 
   return (
     <Stack styles={homeStack}>

@@ -31,6 +31,12 @@ const GET_PROBLEMS = gql`
           name
         }
         createdAt
+        attachmentsByProblemId {
+          nodes {
+            id
+            name
+          }
+        }
       }
     }
   }

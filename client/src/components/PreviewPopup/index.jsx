@@ -4,8 +4,13 @@ import {
   Dialog,
   DialogFooter,
   DialogType,
+  IconButton,
+  Modal,
   Text,
+  Image,
+  ImageFit
 } from "@fluentui/react";
+import { useState } from "react";
 import Attachment from "../Attachment";
 import styles from "./style";
 
@@ -15,7 +20,15 @@ const PreviewPopup = ({ hidePreview, onCancel, data }) => {
     description,
     userAccountByCreatedBy: { firstName, lastName },
     createdAt,
+    attachmentsByProblemId
   } = data;
+
+  const [showModal, setShowModel] = useState(false);
+  const [attachmentImage, setAttachmentImage] = useState()
+
+  const hideModal = () => {
+    setShowModel(!showModal);
+  };
 
   const dialogContentProps = {
     type: DialogType.largeHeader,
@@ -68,11 +81,39 @@ const PreviewPopup = ({ hidePreview, onCancel, data }) => {
       <div style={{ marginBottom: "0.5rem" }}>
         <Text variant="large">Pièce jointe</Text>
       </div>
-      <Attachment />
+      <Attachment files={attachmentsByProblemId.nodes} onClick={(e) => {
+        setAttachmentImage("http://localhost:4000/attachments/" + e.target.innerText)
+        hideModal()
+      }} />
       <ActivityItem {...activityItemProps} className={styles.exampleRoot} />
       <DialogFooter>
         <DefaultButton text="Cancel" onClick={onCancel} />
       </DialogFooter>
+      <Modal
+            styles={{
+              main: { backgroundColor: "#fff0", position: "relative" },
+            }}
+            isOpen={showModal}
+            onDismiss={hideModal}
+            isBlocking={false}
+          >
+            <IconButton
+              styles={{
+                root: { position: "absolute", right: 0, zIndex: 100 },
+                rootHovered: { backgroundColor: "none" },
+                rootPressed: { backgroundColor: "none" }
+              }}
+              iconProps={{ iconName: "Cancel" }}
+              ariaLabel="Close popup modal"
+              onClick={hideModal}
+            />
+            <Image
+              src={attachmentImage}
+              imageFit={ImageFit.cover}
+              maximizeFrame={true}
+              width={800}
+            />
+          </Modal>
     </Dialog>
   );
 };

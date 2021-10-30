@@ -4,10 +4,10 @@ const theme = getTheme();
 
 const styles = mergeStyleSets({
   link: {
-    color: theme.palette.neutralDark,
+    color: theme.palette.neutralSecondary,
     margin: "0.5rem",
     ":focus": {
-      color: theme.palette.neutralDark,
+      color: theme.palette.neutralSecondary,
     }
   },
   li: {

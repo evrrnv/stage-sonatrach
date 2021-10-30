@@ -23,6 +23,12 @@ const CREATE_PROBLEM = gql`
           name
         }
         createdAt
+        attachmentsByProblemId {
+          nodes {
+            id
+            name
+          }
+        }
       }
     }
   }
