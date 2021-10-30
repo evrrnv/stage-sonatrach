@@ -23,8 +23,6 @@ const cache = new InMemoryCache({
 const Apollo = ({ children }) => {
   const { keycloak } = useKeycloak();
 
-  console.log(keycloak.token);
-
   const httpLink = createHttpLink({
     uri: "http://localhost:4000/graphql",
     credentials: "same-origin",

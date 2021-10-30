@@ -247,15 +247,3 @@ VALUES ((SELECT id FROM private_account), 'l.belounis@esi-sba.dz', 'Lounes', 'Be
 INSERT INTO app.user_roles (user_id, role_id) VALUES ('4f9c73b7-98fa-43a0-aac5-fc2e3a60d18e', '02cf8db1-d614-44c5-a317-fcfdc9d0ae6d');
 INSERT INTO app.user_roles (user_id, role_id) VALUES ('dc695e58-3a7d-47b8-b3fd-cbe29c52d0c5', '20a20fd5-77ee-46ce-b253-c7b6a4d7aaf8');
 INSERT INTO app.user_roles (user_id, role_id) VALUES ('9ecb9eb1-1177-45c9-9062-2455503ca558', '97262f49-2552-46c0-b071-b8f2fec99ef7');
-
--- insert problem data
-
--- INSERT INTO app.problem (id, title, description, created_by) VALUES ('33fe545d-91a4-495d-bf43-76960760a41c', 'Suspendisse mauris nulla ullamcorper ut lacinia nec', 'Proin euismod tristique urna eu scelerisque. Fusce nec turpis in dolor varius lacinia in sed dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae', 'dc695e58-3a7d-47b8-b3fd-cbe29c52d0c5');
--- INSERT INTO app.problem (id, title, description, created_by) VALUES ('26275979-0a30-4d87-a0f4-082bee54f8cf', 'Nullam dictum orci ipsum a interdum elit aliquet sed. Nulla facilisi', 'Duis facilisis ipsum eget arcu bibendum rhoncus, Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas', '4f9c73b7-98fa-43a0-aac5-fc2e3a60d18e');
-
--- create table public.post (
---   id serial primary key,
---   headline text,
---   body text,
---   header_image_file text
--- );
